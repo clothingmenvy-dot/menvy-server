@@ -36,7 +36,7 @@ const productSchema = new mongoose.Schema({
   sku: {
     type: String,
     required: [true, 'SKU is required'],
-    unique: true,
+    unique: true,  // This already creates a unique index
     trim: true,
     uppercase: true
   },
@@ -48,19 +48,14 @@ const productSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Indexes for better performance
-productSchema.index({ name: 'text', description: 'text' });
-productSchema.index({ category: 1 });
-productSchema.index({ brand: 1 });
-productSchema.index({ sku: 1 });
 
 // Virtual for formatted price
-productSchema.virtual('formattedPrice').get(function() {
+productSchema.virtual('formattedPrice').get(function () {
   return `$${this.price.toFixed(2)}`;
 });
 
 // Pre-save middleware to ensure SKU is uppercase
-productSchema.pre('save', function(next) {
+productSchema.pre('save', function (next) {
   if (this.sku) {
     this.sku = this.sku.toUpperCase();
   }

@@ -31,8 +31,4 @@ const sellerSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Indexes for better performance
-sellerSchema.index({ email: 1 });
-sellerSchema.index({ name: 'text' });
-
 module.exports = mongoose.model('Seller', sellerSchema);

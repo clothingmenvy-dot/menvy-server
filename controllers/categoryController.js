@@ -1,4 +1,4 @@
-const Category = require('../models/Category');
+const Category = require('../models/categorySchema');
 const { validationResult } = require('express-validator');
 
 // Get all categories

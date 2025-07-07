@@ -38,11 +38,6 @@ const saleSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Indexes for better performance
-saleSchema.index({ productId: 1 });
-saleSchema.index({ sellerId: 1 });
-saleSchema.index({ createdAt: -1 });
-saleSchema.index({ status: 1 });
 
 // Virtual for formatted total
 saleSchema.virtual('formattedTotal').get(function() {

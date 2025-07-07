@@ -39,11 +39,6 @@ const purchaseSchema = new mongoose.Schema({
   timestamps: true
 });
 
-// Indexes for better performance
-purchaseSchema.index({ productId: 1 });
-purchaseSchema.index({ createdAt: -1 });
-purchaseSchema.index({ status: 1 });
-
 // Virtual for formatted total
 purchaseSchema.virtual('formattedTotal').get(function() {
   return `$${this.total.toFixed(2)}`;

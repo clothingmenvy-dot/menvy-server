@@ -1,4 +1,4 @@
-const Brand = require('../models/Brand');
+const Brand = require('../models/brandSchema');
 const { validationResult } = require('express-validator');
 
 // Get all brands
