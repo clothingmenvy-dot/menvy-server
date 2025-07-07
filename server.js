@@ -32,7 +32,7 @@ app.use('/api/', limiter);
 app.use(cors({
   origin: process.env.NODE_ENV === 'production'
     ? ['https://your-frontend-domain.com']
-    : ['http://localhost:5173', 'http://localhost:3000'],
+    : ['http://localhost:5173', 'http://localhost:3000', 'https://inventory-management-system-client.vercel.app'],
   credentials: true
 }));
 
