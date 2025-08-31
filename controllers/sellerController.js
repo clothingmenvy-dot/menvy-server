@@ -100,6 +100,7 @@ exports.createSeller = async (req, res) => {
 
 // Update seller
 exports.updateSeller = async (req, res) => {
+  console.log('Request body:', req.body);
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

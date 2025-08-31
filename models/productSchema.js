@@ -1,5 +1,16 @@
 const mongoose = require('mongoose');
 
+// Helper function to generate random code
+function generateRandomCode() {
+  const numberPart = Math.floor(10000 + Math.random() * 90000); // 5-digit number
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  let letterPart = '';
+  for (let i = 0; i < 4; i++) {
+    letterPart += letters.charAt(Math.floor(Math.random() * letters.length));
+  }
+  return `${numberPart}-${letterPart}`;
+}
+
 const productSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -36,9 +47,14 @@ const productSchema = new mongoose.Schema({
   sku: {
     type: String,
     required: [true, 'SKU is required'],
-    unique: true,  // This already creates a unique index
+    unique: true,
     trim: true,
-    uppercase: true
+  },
+  code: {
+    type: String,
+    default: generateRandomCode,
+    unique: true,
+    trim: true
   },
   isActive: {
     type: Boolean,
@@ -48,18 +64,9 @@ const productSchema = new mongoose.Schema({
   timestamps: true
 });
 
-
 // Virtual for formatted price
 productSchema.virtual('formattedPrice').get(function () {
   return `$${this.price.toFixed(2)}`;
-});
-
-// Pre-save middleware to ensure SKU is uppercase
-productSchema.pre('save', function (next) {
-  if (this.sku) {
-    this.sku = this.sku.toUpperCase();
-  }
-  next();
 });
 
 module.exports = mongoose.model('Product', productSchema);
