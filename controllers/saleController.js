@@ -80,7 +80,7 @@ exports.getSale = async (req, res) => {
 
 // Create sale
 exports.createSale = async (req, res) => {
-  console.log('Request body:', req.body);
+  console.log('Create Sale Request Body:', req.body);
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -111,7 +111,6 @@ exports.createSale = async (req, res) => {
     if (!req.body.total) {
       req.body.total = req.body.quantity * req.body.price;
     }
-
     const sale = new Sale(req.body);
     await sale.save();
 

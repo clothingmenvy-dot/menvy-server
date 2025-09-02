@@ -13,10 +13,11 @@ const purchaseRoutes = require('./routes/purchaseRoutes');
 const authRoutes = require('./routes/authRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
 
+
 const app = express();
 
 // Middleware
-app.use(cors({ origin: ['https://evento-client-eight.vercel.app', 'http://localhost:5173'] }));
+app.use(cors({ origin: ['https://menvy-org-client.vercel.app', 'http://localhost:5173'] }));
 app.use(express.json());
 
 // MongoDB connection
@@ -33,6 +34,7 @@ app.use('/api/v2/sellers', sellerRoutes);
 app.use('/api/v2/sales', saleRoutes);
 app.use('/api/v2/purchases', purchaseRoutes);
 app.use('/api/v2/dashboard', dashboardRoutes);
+
 
 // Health check
 app.get('/api/health', (_, res) => res.json({ status: 'OK', time: new Date().toISOString() }));

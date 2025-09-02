@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
 
 const saleSchema = new mongoose.Schema({
-  bill_no: {
-    type: String,
-  },
   productId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Product',
@@ -37,6 +34,10 @@ const saleSchema = new mongoose.Schema({
     required: [true, 'Total is required'],
     min: [0, 'Total cannot be negative']
   },
+  bill_no: {
+    type: String,
+    required: [true, 'Bill No. is required'],
+  }
 }, {
   timestamps: true
 });
@@ -46,14 +47,5 @@ saleSchema.virtual('formattedTotal').get(function () {
   return `$${this.total.toFixed(2)}`;
 });
 
-// Pre-save middleware to generate bill_no
-saleSchema.pre('save', async function (next) {
-  if (!this.bill_no) {
-    // Generate random 6-digit number
-    const randomNum = Math.floor(100000 + Math.random() * 900000);
-    this.bill_no = `MV${randomNum}`;
-  }
-  next();
-});
 
 module.exports = mongoose.model('Sale', saleSchema);
