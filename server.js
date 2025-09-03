@@ -17,7 +17,7 @@ const dashboardRoutes = require('./routes/dashboardRoutes');
 const app = express();
 
 // Middleware
-app.use(cors({ origin: ['https://menvy-org-client.vercel.app', 'http://localhost:5173'] }));
+app.use(cors({ origin: ['https://menvy-client.vercel.app', 'http://localhost:5173'] }));
 app.use(express.json());
 
 // MongoDB connection
